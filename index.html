@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Page Title</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #579f5b;
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover {
+      background-color: #579f5b;
+    }
+
+    .card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 90%;
+    background-color: #579f5b;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  .card-description {
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+  }
+    </style>
+<body>
+
+<img src="assets/images/The_Tech_Blog.png" alt="The Tech Blog" style="width: 200px;height: 200px;">
+
+<ul>
+    <li><a onclick="gotoHome()">Home</a></li>
+    <li><a onclick="gotoDashboard()">Dashboard</a></li>
+    <li><a onclick="gotoSignin()">Signin</a></li>
+    <li style="float:right"><a class="active" onclick="gotoLogout()">Logout</a></li>
+  </ul>
+
+<div id="mainContent">
+
+</div>
+
+<div id="dashboard">
+
+</div>
+
+<div id="signin">
+
+</div>
+
+</body>
+<script src="assets/script/script.js">
+</script>
+</html>
+
