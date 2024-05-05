@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
-<title>Page Title</title>
+<title>Tech Blod</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="assets/css/styles.css">
 <style>
@@ -51,7 +51,7 @@
     </style>
 <body>
 
-<img src="assets/images/The_Tech_Blog.png" alt="The Tech Blog" style="width: 200px;height: 200px;">
+<img src="/api/blogs/logo" alt="The Tech Blog" style="width: 200px;height: 200px;">
 
 <ul>
     <li><a onclick="gotoHome()">Home</a></li>
@@ -68,12 +68,26 @@
 
 </div>
 
+<div id="login-container" class="login-container">
+  <h2>Login</h2>
+  <form action="/api/blogs/home" method="get">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <input type="submit" value="Login">
+  </form>
+</div>
+
 <div id="signin">
 
 </div>
 
 </body>
-<script src="assets/script/script.js">
+<script src="/api/blogs/script">
+</script>
+<script>
+  gotoHome();
 </script>
 </html>
 

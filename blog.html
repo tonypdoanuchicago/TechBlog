@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Management</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #579f5b;
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover {
+      background-color: #579f5b;
+    }
+
+    .card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 90%;
+    background-color: #579f5b;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  .card-description {
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+  }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            margin-right: 10px;
+        }
+
+        .skill-color {
+            padding: 2px 5px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .delete-button {
+            background-color: #dc3545; /* Bootstrap danger color */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333; /* Darker shade of Bootstrap danger color */
+        }
+    </style>
+</head>
+<body>
+    <img src="/api/blogs/logo" alt="The Tech Blog" style="width: 200px;height: 200px;">
+
+    <ul>
+        <li><a onclick="gotoHome()">Home</a></li>
+        <li><a onclick="gotoDashboard()">Dashboard</a></li>
+        <li><a onclick="gotoSignin()">Signin</a></li>
+        <li style="float:right"><a class="active" onclick="gotoLogout()">Logout</a></li>
+      </ul>
+    
+    <div id="mainContent">
+    
+    </div>
+    
+    <div id="dashboard">
+    
+    </div>
+    
+    <div id="signin">
+    
+    </div>
+
+<h2>Add or Update Blog</h2>
+
+<form id="blogForm">
+    <label for="blogTitle">Title:</label><br>
+    <input type="text" id="blog_title" name="blog_title" required><br><br>
+    
+    <label for="blogDescription">Description: </label><br>
+    <input type="text" id="blog_description" name="blog_description" required><br><br>
+    
+    <button type="button" onclick="updateBlog()">Update</button> &nbsp;&nbsp;&nbsp; <button type="button" onclick="addOrUpdateBlog()">Add</button>
+</form>
+
+<script>
+    var globalID;
+
+    function getBlog() {
+        // Get the current path from the URL
+        const currentPath = window.location.pathname;
+
+        // Use a regular expression to extract the last whole number from the path
+        const lastWholeNumber = currentPath.match(/(\d+)(?!.*\d)/);
+
+        // If a last whole number is found, convert it to a number
+        if (lastWholeNumber) {
+            const lastWholeNumberValue = parseInt(lastWholeNumber[0]);
+            console.log("Last whole number in the path:", lastWholeNumberValue);
+
+            blogId = lastWholeNumberValue;
+
+            globalID = lastWholeNumberValue;
+
+            fetch("/api/blogs/blog/" + blogId, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(json => {
+                console.log("getBlog() successfully: ", json);
+
+                document.getElementById("blog_title").value = json.blog_title;
+                document.getElementById("blog_description").value = json.blog_description;
+            })
+            .catch(error => {
+                console.error("getBlog() error: ", error);
+            });
+        } else {
+            console.log("No whole number found in the path.");
+        }
+    }
+
+    function addOrUpdateBlog() {
+        var blogtitle = document.getElementById("blog_title").value;
+        var blogdescription = document.getElementById("blog_description").value;
+        var blogtimestamp = Date.now()
+
+        var data = {
+            blog_title: blogtitle,
+            blog_description: blogdescription,
+            blog_timestamp: blogtimestamp
+        };
+
+        // Perform HTTP PUT request to API route
+        fetch("/api/blogs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(json => {
+            console.log("Blog added/updated successfully:", json);
+            // Optionally clear the form or update the UI with the new/updated skill
+        })
+        .catch(error => {
+            console.error("Blog adding/updating skill:", error);
+            // Optionally display an error message to the user
+        });
+    }
+
+    function updateBlog() {
+        var blogtitle = document.getElementById("blog_title").value;
+        var blogdescription = document.getElementById("blog_description").value;
+        var blogtimestamp = Date.now()
+
+        var data = {
+            blog_title: blogtitle,
+            blog_description: blogdescription,
+            blog_timestamp: blogtimestamp
+        };
+
+        console.log("data: " + JSON.stringify(data));
+
+        // Perform HTTP PUT request to API route
+        fetch(`/api/blogs/blog/update/` + , {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(json => {
+            console.log("Blog added/updated successfully:", json);
+            // Optionally clear the form or update the UI with the new/updated skill
+        })
+        .catch(error => {
+            console.error("Blog adding/updating skill:", error);
+            // Optionally display an error message to the user
+        });
+    }
+
+    getBlog()
+</script>
+<script src="/api/blogs/script"></script>
+<script>
+    window.document.getElementById('mainContent').style.display = 'none';
+    window.document.getElementById('dashboard').style.display = 'none';
+    window.document.getElementById('signin').style.display = 'none';  
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "techblog",
+  "version": "1.0.0",
+  "description": "Assignment",
+  "main": "server.js",
+  "scripts": {
+    "test": "run1",
+    "start": "node server.js"
+  },
+  "author": "Tony Doan",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "pg": "^8.11.3",
+    "sequelize": "^5.21.7"
+  }
+}
