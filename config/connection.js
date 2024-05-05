@@ -3,6 +3,7 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
+/*
 const sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
@@ -12,8 +13,8 @@ const sequelize = new Sequelize(
       dialect: 'postgres',
     }
   );
+*/
 
-/*
     const sequelize = new Sequelize('challenge_14_db', 'root', 'Swabi1234', {
       host: 'localhost',
       dialect: 'mysql',
@@ -21,6 +22,5 @@ const sequelize = new Sequelize(
         decimalNumbers: true,
       },
     });
-*/
 
 module.exports = sequelize;

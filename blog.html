@@ -107,10 +107,10 @@
 <h2>Add or Update Blog</h2>
 
 <form id="blogForm">
-    <label for="blogTitle">Title:</label><br>
+    Title:<br>
     <input type="text" id="blog_title" name="blog_title" required><br><br>
     
-    <label for="blogDescription">Description: </label><br>
+    Description: <br>
     <input type="text" id="blog_description" name="blog_description" required><br><br>
     
     <button type="button" onclick="updateBlog()">Update</button> &nbsp;&nbsp;&nbsp; <button type="button" onclick="addOrUpdateBlog()">Add</button>
@@ -200,7 +200,7 @@
         console.log("data: " + JSON.stringify(data));
 
         // Perform HTTP PUT request to API route
-        fetch(`/api/blogs/blog/update/` + , {
+        fetch(`/api/blogs/blog/update/` + globalID, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
